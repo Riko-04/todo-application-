@@ -33,5 +33,5 @@ jobs:
       - name: Build and push Docker image
         run: |
           cd backend
-          docker build -t your-dockerhub-username/todo-backend .
-          docker push your-dockerhub-username/todo-backend
+          docker build -t riko04/todo-backend .
+          docker push riko04/todo-backend
