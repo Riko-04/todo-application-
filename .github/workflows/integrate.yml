@@ -1,0 +1,51 @@
+name: Integrate Frontend & Backend
+
+on:
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  frontend-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Run linting & tests
+        run: |
+          cd frontend
+          npm run lint
+          npm run test
+
+      - name: Build Angular (Validation)
+        run: |
+          cd frontend
+          npm run build --configuration production
+
+  backend-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build & test backend
+        run: |
+          cd backend
+          mvn clean package
+          mvn test
