@@ -89,6 +89,13 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder",
+          "options": {
+            "tsConfig": "tsconfig.app.json",
+            "lintFilePatterns": ["src/**/*.ts"]
+          }
         }
       }
     }
